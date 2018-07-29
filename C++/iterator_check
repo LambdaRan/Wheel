@@ -1,0 +1,36 @@
+
+
+// 检查自定义迭代器类型标签的方法
+// 模板参数推导机制
+template <class InIter>
+void alg(InIter, InIter, std::input_iterator_tag)
+{
+    std::cout << "alg() called for input iterator\n";
+}
+template <class OUIter>
+void alg(OUIter, OUIter, std::output_iterator_tag)
+{
+    std::cout << "alg() called for output iterator\n";
+}
+template <class FWIter>
+void alg(FWIter, FWIter, std::forward_iterator_tag)
+{
+    std::cout << "alg() called for forward iterator\n";
+}
+template< class BDIter >
+void alg(BDIter, BDIter, std::bidirectional_iterator_tag)
+{
+    std::cout << "alg() called for bidirectional iterator\n";
+}
+template <class RAIter>
+void alg(RAIter, RAIter, std::random_access_iterator_tag)
+{
+    std::cout << "alg() called for random-access iterator\n";
+}
+
+template< class Iter >
+void alg(Iter first, Iter last)
+{
+    alg(first, last,
+        typename std::iterator_traits<Iter>::iterator_category());
+}
